@@ -1,5 +1,5 @@
 # ----- Edit these Variables for your own Use Case ----- #
-$PASSWORD_FOR_USERS   = "Password1"    # Waa Password ka ay ka simanyihiin dhamaan users ka 
+$PASSWORD_FOR_USERS   = "Passw0rd1"    # Waa Password ka ay ka simanyihiin dhamaan users ka 
 $USER_FIRST_LAST_LIST = Get-Content .\magacyo.txt # halka uu yaalo fileka magacyada kugu jiraan
 $OU_NAME              = "_USERS"      # Magaca Organizational Unit ka
 # ------------------------------------------------------ #
@@ -35,7 +35,7 @@ foreach ($n in $USER_FIRST_LAST_LIST) {
                -DisplayName "$first" `
                -Name $username `
                -SamAccountName $username `
-               -UserPrincipalName "$username@EvilCorp.local" `
+               -UserPrincipalName "$username@EvilCorp.local" ` #halkaas ku badal domain kaaga aad rabto in aad users ka u abuurtid 
                -EmployeeID $username `
                -PasswordNeverExpires $true `
                -Path $ouDistinguishedName `
