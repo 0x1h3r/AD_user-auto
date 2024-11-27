@@ -1,7 +1,7 @@
 # ----- Edit these Variables for your own Use Case ----- #
 $PASSWORD_FOR_USERS   = "Password1"    # Waa Password ka ay ka simanyihiin dhamaan users ka 
-$USER_FIRST_LAST_LIST = Get-Content .\names.txt # halka uu yaalo fileka magacyada kugu jiraan
-$OU_NAME              = "USERS"      # Magaca Organizational Unit ka
+$USER_FIRST_LAST_LIST = Get-Content .\magacyo.txt # halka uu yaalo fileka magacyada kugu jiraan
+$OU_NAME              = "_USERS"      # Magaca Organizational Unit ka
 # ------------------------------------------------------ #
 
 
