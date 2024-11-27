@@ -25,7 +25,7 @@ Ensure the script is run by a user with:
 
 ### 3. Active Directory Module
 
-Installation
+### 4. Installation
 Clone the Repository:
 Clone the script to your local machine using Git:
 
