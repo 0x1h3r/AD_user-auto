@@ -29,7 +29,7 @@ Ensure the script is run by a user with:
 Clone the Repository:
 Clone the script to your local machine using Git:
 
-download manual or 
+download manual or clone ex. 
 git clone https://github.com/0x1h3r/AD_user-auto.git
 
 ### 5. Modify Variables:
