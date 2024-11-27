@@ -24,95 +24,53 @@ Ensure the script is run by a user with:
 - Permission to create objects in AD.
 
 ### 3. Active Directory Module
-Install the Active Directory PowerShell module by running:
-```powershell
-Install-WindowsFeature -Name RSAT-AD-PowerShell
+
 Installation
-Clone or download this repository:
+Clone the Repository:
+Clone the script to your local machine using Git:
 
 bash
 Copy code
-git clone https://github.com/your-username/ad-user-script.git
-cd ad-user-script
-Place a text file named magacyo.txt in the root directory of the repository. Each line should contain a user's first and last name separated by a space.
+git clone https://github.com/YourUsername/YourRepository.git
+Modify Variables:
+Open the script in a text editor and configure the following variables as needed:
 
-Example of magacyo.txt:
-
-Copy code
-John Doe
-Jane Smith
-Ali Ahmed
-Usage
-Open PowerShell as Administrator.
-
-Navigate to the directory containing the script:
-
-powershell
-Copy code
-cd path\to\script
-Run the script:
+$PASSWORD_FOR_USERS: Set a secure password for created users.
+$OU_PATH: Update the Organizational Unit (OU) path to match your AD structure.
+$USER_COUNT: Set the number of users to create (if random users are desired).
+Run the Script:
+Launch PowerShell as an administrator and run the script:
 
 powershell
 Copy code
 .\Create-ADUsers.ps1
-The script will:
+Usage
+Customizing User Creation
+The script uses random adjectives and nouns to generate unique usernames. You can customize these by editing the $ADJECTIVES and $NOUNS arrays in the script.
+Organizational Unit (OU)
+By default, the script creates an _USERS OU. You can modify this name or the structure in the $OU_PATH variable.
+Error Handling
+If a user already exists, the script skips the creation and logs a message.
+Ensure your Active Directory is accessible and your machine has domain connectivity.
+Example Output
+When executed, the script outputs the progress in PowerShell:
 
-Create an Organizational Unit (OU) named _USERS.
-Read user names from magacyo.txt.
-Create Active Directory user accounts with the specified password.
-Customization
-Variables to Edit
-$PASSWORD_FOR_USERS: Default password for all users.
-$USER_FIRST_LAST_LIST: Path to the text file containing user names.
-Example:
-
-powershell
-Copy code
-$PASSWORD_FOR_USERS = "SecureP@ssw0rd"
-$USER_FIRST_LAST_LIST = Get-Content .\names.txt
-Script Behavior
-Organizational Unit: If _USERS OU already exists, the script reuses it.
-User Account Details:
-Username format: First initial + Last name (e.g., jdoe for John Doe).
-Password: The value specified in $PASSWORD_FOR_USERS.
-Password policy: Password never expires.
-Troubleshooting
-Command Not Found: Ensure the Active Directory module is installed:
-
-powershell
-Copy code
-Import-Module ActiveDirectory
-Access Denied: Verify the user running the script has necessary permissions.
-
-Invalid Input File: Ensure magacyo.txt contains valid entries in the format:
-
-Copy code
-FirstName LastName
-Sample Output
 plaintext
 Copy code
-Creating user: jdoe
-Creating user: jsmith
-Creating user: aahmed
-Contributing
-Contributions are welcome! Feel free to fork this repository and submit a pull request.
-
+Creating user: BoldEagle1
+Creating user: CleverFox2
+Creating user: SwiftTiger3
+Creating user: MightyHawk4
+Creating user: BravePanther5
+User creation completed!
 License
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-markdown
-Copy code
+Contribution
+Contributions are welcome! Please fork the repository and submit a pull request with your improvements or ideas.
 
-### Explanation:
-- **Overview**: Clarifies the script's purpose and functionality.
-- **Usage**: Guides users on how to prepare the input and run the script.
-- **Customization**: Highlights editable parts of the script for different use cases.
-- **Troubleshooting**: Addresses common issues users may encounter.
-- **Professional Formatting**: Adds structure and user-friendly details. 
-
-Let me know if you'd like further adjustments!
-
-
-
-
-
+Fork the repository.
+Create a new branch for your changes.
+Submit a pull request with a detailed explanation of your updates.
+Disclaimer
+This script is provided as-is and should be tested in a non-production environment before deployment. The author is not responsible for any issues caused by misuse or errors in the script.
