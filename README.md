@@ -31,20 +31,24 @@ Clone the script to your local machine using Git:
 
 bash
 Copy code
-git clone https://github.com/YourUsername/YourRepository.git
+git clone https://github.com/0x1h3r/AD_user-auto.git
+
 Modify Variables:
 Open the script in a text editor and configure the following variables as needed:
 
 $PASSWORD_FOR_USERS: Set a secure password for created users.
 $OU_PATH: Update the Organizational Unit (OU) path to match your AD structure.
 $USER_COUNT: Set the number of users to create (if random users are desired).
+
 Run the Script:
 Launch PowerShell as an administrator and run the script:
 
 powershell
-Copy code
+
 .\Create-ADUsers.ps1
+
 Usage
+
 Customizing User Creation
 The script uses random adjectives and nouns to generate unique usernames. You can customize these by editing the $ADJECTIVES and $NOUNS arrays in the script.
 Organizational Unit (OU)
