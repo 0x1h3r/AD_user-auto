@@ -1,46 +1,45 @@
- # ----- adiga ayaa badalan kara qasab ma aha in aad sidaan u isticmashid  ----- #
-$PASSWORD_FOR_USERS   = "tal0sec1"
-$NUMBER_OF_ACCOUNTS_TO_CREATE = 10000
+# ----- Edit these Variables for your own Use Case ----- #
+$PASSWORD_FOR_USERS   = "Password1"    # Waa Password ka ay ka simanyihiin dhamaan users ka 
+$USER_FIRST_LAST_LIST = Get-Content .\names.txt # halka uu yaalo fileka magacyada kugu jiraan
+$OU_NAME              = "USERS"      # Magaca Organizational Unit ka
 # ------------------------------------------------------ #
 
-Function generate-random-name() {
-    $consonants = @('b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','z')
-    $vowels = @('a','e','i','o','u','y')
-    $nameLength = Get-Random -Minimum 3 -Maximum 7
-    $count = 0
-    $name = ""
 
-    while ($count -lt $nameLength) {
-        if ($($count % 2) -eq 0) {
-            $name += $consonants[$(Get-Random -Minimum 0 -Maximum $($consonants.Count - 1))]
-        }
-        else {
-            $name += $vowels[$(Get-Random -Minimum 0 -Maximum $($vowels.Count - 1))]
-        }
-        $count++
-    }
+$password = ConvertTo-SecureString $PASSWORD_FOR_USERS -AsPlainText -Force
 
-    return $name
-
+# abuurida  Organizational Unit (Hadii uusan horey u jirin )
+if (-not (Get-ADOrganizationalUnit -Filter {Name -eq $OU_NAME} -ErrorAction SilentlyContinue)) {
+    New-ADOrganizationalUnit -Name $OU_NAME -ProtectedFromAccidentalDeletion $false
+    Write-Host "Organizational Unit '$OU_NAME' created successfully." -ForegroundColor Green
+} else {
+    Write-Host "Organizational Unit '$OU_NAME' already exists." -ForegroundColor Yellow
 }
 
-$count = 1
-while ($count -lt $NUMBER_OF_ACCOUNTS_TO_CREATE) {
-    $fisrtName = generate-random-name
-    $lastName = generate-random-name
-    $username = $fisrtName + '.' + $lastName
-    $password = ConvertTo-SecureString $PASSWORD_FOR_USERS -AsPlainText -Force
 
-    Write-Host "Creating user: $($username)" -BackgroundColor Black -ForegroundColor Cyan
+$ouDistinguishedName = (Get-ADOrganizationalUnit -Filter {Name -eq $OU_NAME}).DistinguishedName
+
+
+foreach ($n in $USER_FIRST_LAST_LIST) {
+    
+    $first = $n.Split(" ")[0].Trim()
+
+    
+    $username = $first.ToLower()
+
+    
+    Write-Host "Creating user: $username" -ForegroundColor Cyan
+
     
     New-AdUser -AccountPassword $password `
-               -GivenName $firstName `
-               -Surname $lastName `
-               -DisplayName $username `
+               -GivenName $first `
+               -DisplayName "$first" `
                -Name $username `
+               -SamAccountName $username `
+               -UserPrincipalName "$username@EvilCorp.local" `
                -EmployeeID $username `
                -PasswordNeverExpires $true `
-               -Path "ou=_EMPLOYEES,$(([ADSI]`"").distinguishedName)" `
+               -Path $ouDistinguishedName `
                -Enabled $true
-    $count++
 }
+
+Write-Host "User creation process completed." -ForegroundColor Green
